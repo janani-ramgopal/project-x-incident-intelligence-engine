@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
+Project X – Incident Intelligence Engine
+1. Problem Summary
+Modern production incidents are difficult to triage due to:
+•	Noisy logs
+•	Incomplete context
+•	Cross-stack variability (Node, Java, etc.)
+•	Time pressure
+•	Lack of standardized debugging workflows
+Engineers often rely on manual hypothesis generation, tribal knowledge, and inconsistent processes.
+This solution demonstrates how AI can be embedded into the engineering workflow to:
+•	Extract meaningful signals from logs
+•	Generate structured, ranked hypotheses
+•	Propose reproduction strategies
+•	Recommend fault injection scenarios
+•	Suggest regression tests
+•	Surface observability gaps and preventative guardrails
+The goal is not to replace engineers, but to accelerate structured thinking and enforce best practices by default.
+________________________________________
+2. Solution Approach and Architecture
+The system is built as a stack-agnostic AI-assisted incident analysis engine.
+High-level flow:
+Client (Next.js UI)
+        ↓
+API Route (/api/analyze)
+        ↓
+Sanitization + Redaction Layer
+        ↓
+Stack Detection + Signal Extraction
+        ↓
+Policy Engine + Standards Retrieval
+        ↓
+LLM Prompt Builder
+        ↓
+OpenAI API
+        ↓
+Zod Validation + Normalization
+        ↓
+Structured Incident Report (JSON)
+Key architectural decisions:
+•	Stack adapters allow support for Node.js and Java without tight coupling.
+•	Policy checks and standards are retrieved before calling the LLM.
+•	AI output is validated and normalized using Zod.
+•	All responses are structured JSON to ensure deterministic rendering.
+The architecture is modular and extensible to additional stacks or enterprise standards.
+________________________________________
+3. How Best Practices and Processes Are Embedded
+Best practices are embedded at multiple layers:
+1.	Sanitization Layer
+o	Redacts staff IDs, IP addresses, emails, card numbers, tokens.
+o	Prevents sensitive data leakage to the model.
+2.	Policy Engine
+o	Flags risky patterns (e.g., unsafe logging, error handling gaps).
+o	Surfaces findings as structured policy inputs.
+3.	Stack Adapters
+o	Define failure patterns and signals per stack.
+o	Encode safe fix guidelines.
+4.	Structured Output Schema (Zod)
+o	Enforces required fields.
+o	Prevents malformed AI responses.
+o	Normalizes inconsistent model output.
+5.	Hypothesis-driven model design
+o	Requires ranked hypotheses.
+o	Requires confirm/falsify evidence.
+o	Encourages evidence-based debugging.
+The system makes “doing the right thing” the default behavior.
+________________________________________
+4. How AI Is Used and Controlled
+AI is used for reasoning and structured synthesis, not for raw execution.
+AI responsibilities:
+•	Generate ranked hypotheses
+•	Propose reproduction strategies
+•	Suggest fault injection tests
+•	Identify guardrails and observability gaps
+Control mechanisms:
+•	Strict system prompt requiring JSON-only output
+•	Schema validation with Zod
+•	Output normalization
+•	Log truncation limits
+•	Explicit safety fields (assumptions, unknowns, red flags)
+•	No external browsing or uncontrolled context
+The AI operates within bounded, sanitized context.
+________________________________________
+5. Assumptions, Trade-offs, and Limitations
+Assumptions:
+•	Engineers review AI output before action.
+•	The model has sufficient context to reason about the incident.
+Trade-offs:
+•	LLM-based reasoning may increase latency.
+•	Heuristic stack detection may not be perfect.
+•	JSON enforcement reduces flexibility but increases reliability.
+Limitations:
+•	No persistent storage.
+•	No vector-based RAG yet.
+•	No real-time log ingestion.
+•	Model quality depends on prompt design.
+•	Not integrated with CI/CD or observability tools.
+This is an extensible MVP designed to demonstrate architectural capability.
+________________________________________
+6. Instructions to Run the Solution
+1. Install dependencies
+npm install
+2. Create environment file
+Create .env.local:
+OPENAI_API_KEY=your_api_key_here
+OPENAI_MODEL=gpt-4o-mini
+3. Run locally
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open:
+http://localhost:3000
+Paste sanitized logs and generate an incident report.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
