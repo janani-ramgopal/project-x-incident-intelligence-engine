@@ -1,0 +1,44 @@
+[
+    {
+      "id": "java-oom-gc-overhead",
+      "title": "OutOfMemoryError or GC overhead",
+      "severity": "HIGH",
+      "patternHints": ["java.lang.OutOfMemoryError", "GC overhead limit exceeded"],
+      "recommendation": "Monitor heap usage and tune JVM memory settings."
+    },
+    {
+      "id": "java-deadlock-thread-starvation",
+      "title": "Deadlock or thread starvation",
+      "severity": "HIGH",
+      "patternHints": ["deadlock detected", "waiting on monitor", "thread pool exhausted"],
+      "recommendation": "Analyze thread dumps and avoid blocking shared resources."
+    },
+    {
+      "id": "java-pool-exhaustion",
+      "title": "Connection or thread pool exhaustion",
+      "severity": "MEDIUM",
+      "patternHints": ["pool is full", "max pool size reached", "RejectedExecutionException"],
+      "recommendation": "Tune pool sizes and monitor thread usage."
+    },
+    {
+      "id": "java-classpath-noclassdeffound",
+      "title": "Classpath or NoClassDefFoundError issues",
+      "severity": "MEDIUM",
+      "patternHints": ["NoClassDefFoundError", "ClassNotFoundException", "classpath conflict"],
+      "recommendation": "Check build dependencies and classpath configuration."
+    },
+    {
+      "id": "java-memory-leak",
+      "title": "Potential memory leak detected",
+      "severity": "HIGH",
+      "patternHints": ["PermGen space", "Metaspace", "memory leak detected"],
+      "recommendation": "Use profiling tools to identify and fix memory leaks."
+    },
+    {
+      "id": "JAVA-NULL-MAPGET-ISEMPTY",
+      "title": "Null values returned from Map.get() and subsequent isEmpty() call",
+      "severity": "MEDIUM",
+      "patternHints": ["Map.get", "isEmpty()", "Cannot invoke String.isEmpty()"],
+      "recommendation": "Use null-safe handling: check for null before calling isEmpty; validate required keys earlier"
+    }
+  ]

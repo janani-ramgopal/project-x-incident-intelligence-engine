@@ -1,0 +1,30 @@
+[
+    {
+      "id": "node-unhandled-promise-rejection",
+      "title": "Unhandled promise rejection",
+      "severity": "HIGH",
+      "patternHints": ["UnhandledPromiseRejectionWarning", "process.on('unhandledRejection')"],
+      "recommendation": "Always handle promise rejections and add global handlers."
+    },
+    {
+      "id": "node-blocking-operation",
+      "title": "Blocking operation in event loop",
+      "severity": "HIGH",
+      "patternHints": ["sync fs call", "while (true)", "CPU intensive loop"],
+      "recommendation": "Avoid blocking the event loop; use async APIs."
+    },
+    {
+      "id": "node-event-loop-stall",
+      "title": "Event loop stall detected",
+      "severity": "MEDIUM",
+      "patternHints": ["event loop lag", "slow event loop", "setTimeout delay"],
+      "recommendation": "Monitor event loop lag and optimize long-running tasks."
+    },
+    {
+      "id": "node-pool-exhaustion",
+      "title": "Connection or resource pool exhaustion",
+      "severity": "MEDIUM",
+      "patternHints": ["pool is full", "max pool size reached", "resource unavailable"],
+      "recommendation": "Tune pool sizes and monitor resource usage."
+    }
+  ]

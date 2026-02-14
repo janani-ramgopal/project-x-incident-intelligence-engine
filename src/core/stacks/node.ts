@@ -1,0 +1,40 @@
+// src/core/stacks/node.ts
+
+export const nodeStackAdapter = {
+    id: "node",
+    failurePatterns: [
+      "Event loop stalls",
+      "Unhandled promise rejections",
+      "Connection pool exhaustion",
+      "Retry storms",
+      "Memory leaks",
+      "Race conditions",
+      "Callback hell",
+      "Resource contention",
+      "Uncaught exceptions",
+      "Slow external dependencies",
+    ],
+    signalsToCheck: [
+      "Request latency (p95/p99)",
+      "Error rate",
+      "Garbage collection/memory usage",
+      "Event loop lag",
+      "Connection pool stats",
+      "CPU utilization",
+      "Process restarts/crashes",
+      "Log error patterns",
+      "Throughput metrics",
+      "Dependency response times",
+    ],
+    safeFixGuidelines: [
+      "Avoid blocking the event loop",
+      "Add timeouts to all external calls",
+      "Implement exponential backoff for retries",
+      "Use idempotency keys for critical operations",
+      "Apply structured logging for traceability",
+      "Validate and sanitize all inputs",
+      "Monitor resource usage and set limits",
+      "Handle errors and rejections explicitly",
+      "Test fixes under load and edge cases",
+    ],
+  };

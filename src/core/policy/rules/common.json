@@ -1,0 +1,37 @@
+[
+    {
+      "id": "common-secrets-in-logs",
+      "title": "Secrets or PII in logs",
+      "severity": "HIGH",
+      "patternHints": ["password", "token", "secret", "credit card", "ssn"],
+      "recommendation": "Never log secrets or PII. Use redaction and log sanitization."
+    },
+    {
+      "id": "common-missing-correlation-id",
+      "title": "Missing correlation IDs",
+      "severity": "MEDIUM",
+      "patternHints": ["no correlation id", "missing trace id", "request id absent"],
+      "recommendation": "Include correlation or trace IDs in all logs and requests."
+    },
+    {
+      "id": "common-retries-no-backoff",
+      "title": "Retries without backoff",
+      "severity": "MEDIUM",
+      "patternHints": ["retry loop", "while (retry)", "no backoff"],
+      "recommendation": "Implement exponential backoff and jitter for retries."
+    },
+    {
+      "id": "common-missing-timeouts",
+      "title": "Timeouts missing on external calls",
+      "severity": "HIGH",
+      "patternHints": ["no timeout", "infinite wait", "await external call"],
+      "recommendation": "Always set timeouts for network and external service calls."
+    },
+    {
+      "id": "common-noisy-logs",
+      "title": "Noisy or excessive logging",
+      "severity": "LOW",
+      "patternHints": ["log.debug", "console.log", "frequent logging"],
+      "recommendation": "Reduce log verbosity and avoid logging in tight loops."
+    }
+  ]
