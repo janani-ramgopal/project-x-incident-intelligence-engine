@@ -41,7 +41,7 @@ ________________________________________
 The system is built as a stack-agnostic AI-assisted incident analysis engine.
 
 
-_High-level flow:_
+_High-level flow:_  [Diagram attached Flow_diagram.png]
 
 Client (Next.js UI)  ->  API Route (/api/analyze)  -> Sanitization + Redaction Layer -> Stack Detection + Signal Extraction -> Policy Engine + Standards Retrieval -> LLM Prompt Builder -> OpenAI API -> Zod Validation + Normalization -> Structured Incident Report (JSON)
 
